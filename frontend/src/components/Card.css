@@ -1,0 +1,64 @@
+.card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-normal);
+}
+
+/* Padding Variants */
+.card--padding-sm {
+  padding: var(--spacing-md);
+}
+
+.card--padding-md {
+  padding: var(--spacing-lg);
+}
+
+.card--padding-lg {
+  padding: var(--spacing-xl);
+}
+
+.card--padding-none {
+  padding: 0;
+}
+
+/* Shadow Variants */
+.card--shadow-none {
+  box-shadow: none;
+}
+
+.card--shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.card--shadow-md {
+  box-shadow: var(--shadow-md);
+}
+
+.card--shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+.card--shadow-xl {
+  box-shadow: var(--shadow-xl);
+}
+
+/* Hover Effect */
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .card--padding-sm {
+    padding: var(--spacing-sm);
+  }
+
+  .card--padding-md {
+    padding: var(--spacing-md);
+  }
+
+  .card--padding-lg {
+    padding: var(--spacing-lg);
+  }
+}

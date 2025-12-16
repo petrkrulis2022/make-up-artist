@@ -1,0 +1,186 @@
+/* Mobile-first base styles */
+.admin-dashboard {
+  width: 100%;
+}
+
+.admin-dashboard__welcome {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.admin-dashboard__welcome h2 {
+  font-size: var(--font-size-2xl);
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-md);
+  font-family: var(--font-family-primary);
+}
+
+.admin-dashboard__welcome p {
+  font-size: var(--font-size-base);
+  color: var(--color-gray-dark);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+.admin-dashboard__error {
+  padding: var(--spacing-md);
+  background-color: #ffebee;
+  color: var(--color-error);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--font-size-base);
+}
+
+.admin-dashboard__loading {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  font-size: var(--font-size-lg);
+  color: var(--color-gray-dark);
+}
+
+.admin-dashboard__summary {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.admin-dashboard__summary h3 {
+  font-size: var(--font-size-xl);
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-lg);
+  font-family: var(--font-family-primary);
+}
+
+.admin-dashboard__stats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+.admin-dashboard__stat-card {
+  background-color: var(--color-white);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  border: 1px solid var(--color-gray-medium);
+}
+
+.admin-dashboard__stat-value {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-secondary);
+  margin-bottom: var(--spacing-sm);
+  font-family: var(--font-family-primary);
+}
+
+.admin-dashboard__stat-label {
+  font-size: var(--font-size-base);
+  color: var(--color-gray-dark);
+  font-weight: var(--font-weight-medium);
+}
+
+.admin-dashboard__upload-section {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.admin-dashboard__actions {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.admin-dashboard__actions h3 {
+  font-size: var(--font-size-xl);
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-lg);
+  font-family: var(--font-family-primary);
+}
+
+.admin-dashboard__action-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+.admin-dashboard__action-card {
+  background-color: var(--color-white);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-gray-medium);
+}
+
+.admin-dashboard__action-card h4 {
+  font-size: var(--font-size-lg);
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-sm);
+  font-family: var(--font-family-primary);
+}
+
+.admin-dashboard__action-card p {
+  font-size: var(--font-size-base);
+  color: var(--color-gray-dark);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--spacing-lg);
+}
+
+.admin-dashboard__action-btn {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: background-color var(--transition-normal);
+  min-height: var(--touch-target-min);
+  font-family: var(--font-family-secondary);
+  width: 100%;
+}
+
+.admin-dashboard__action-btn:hover {
+  background-color: #6d5d47;
+}
+
+.admin-dashboard__action-btn:active {
+  transform: translateY(1px);
+}
+
+/* Tablet: 768-1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .admin-dashboard__welcome h2 {
+    font-size: var(--font-size-3xl);
+  }
+
+  .admin-dashboard__stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .admin-dashboard__action-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .admin-dashboard__action-btn {
+    width: auto;
+  }
+}
+
+/* Desktop: 1024px+ */
+@media (min-width: 1024px) {
+  .admin-dashboard__welcome h2 {
+    font-size: var(--font-size-3xl);
+  }
+
+  .admin-dashboard__stats {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .admin-dashboard__action-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .admin-dashboard__action-btn {
+    width: auto;
+  }
+}
+
+.admin-dashboard__management-section {
+  margin-bottom: var(--spacing-2xl);
+}

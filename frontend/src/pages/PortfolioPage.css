@@ -1,0 +1,109 @@
+/* Mobile-first base styles */
+.portfolio-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.portfolio-title {
+  text-align: center;
+  font-size: var(--font-size-3xl);
+  color: var(--color-primary, #8b7355);
+  margin-bottom: var(--spacing-xl);
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.portfolio-loading,
+.portfolio-error {
+  text-align: center;
+  padding: var(--spacing-xl);
+  font-size: var(--font-size-lg);
+  color: var(--color-primary, #8b7355);
+}
+
+.portfolio-error {
+  color: var(--color-error, #d32f2f);
+}
+
+.category-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  justify-content: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.category-button {
+  min-width: 140px;
+  flex: 1 1 auto;
+  max-width: 100%;
+}
+
+.selected-category {
+  margin-top: var(--spacing-xl);
+}
+
+.category-name {
+  text-align: center;
+  font-size: var(--font-size-2xl);
+  color: var(--color-primary, #8b7355);
+  margin-bottom: var(--spacing-lg);
+  font-family: var(--font-family-primary);
+}
+
+/* Responsive adjustments - Mobile: 320-767px (base styles above) */
+
+/* Tablet: 768-1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .portfolio-page {
+    padding: var(--spacing-2xl) var(--spacing-lg);
+  }
+
+  .portfolio-title {
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .category-button {
+    min-width: 180px;
+    flex: 0 1 auto;
+  }
+
+  .category-name {
+    font-size: var(--font-size-3xl);
+  }
+}
+
+/* Desktop: 1024px+ */
+@media (min-width: 1024px) {
+  .portfolio-page {
+    padding: var(--spacing-3xl) var(--spacing-xl);
+  }
+
+  .portfolio-title {
+    font-size: var(--font-size-5xl);
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .category-filters {
+    gap: var(--spacing-lg);
+  }
+
+  .category-button {
+    min-width: 200px;
+    flex: 0 1 auto;
+  }
+
+  .category-name {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-xl);
+  }
+}
+
+/* Large Desktop: 1920px+ */
+@media (min-width: 1920px) {
+  .portfolio-page {
+    max-width: 1400px;
+  }
+}
