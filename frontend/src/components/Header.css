@@ -1,11 +1,12 @@
 /* Header styles */
 .header {
-  background-color: #ffffff;
-  border-bottom: 1px solid #f0f0f0;
-  padding: 1rem 2rem;
+  background-color: var(--color-white);
+  border-bottom: 2px solid var(--color-gray-light);
+  padding: var(--spacing-lg) var(--spacing-xl);
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: var(--shadow-sm);
 }
 
 .header-content {
@@ -21,23 +22,25 @@
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #8b7355;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
   letter-spacing: 1px;
+  transition: color var(--transition-normal);
 }
 
 .logo:hover {
-  color: #d4af37;
+  color: var(--color-secondary);
 }
 
 /* Mobile styles */
 @media (max-width: 767px) {
   .header {
-    padding: 1rem;
+    padding: var(--spacing-md) var(--spacing-md);
   }
 
   .logo {
-    font-size: 1.2rem;
+    font-size: var(--font-size-lg);
   }
 }

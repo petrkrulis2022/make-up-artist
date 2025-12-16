@@ -51,7 +51,7 @@ const ImageManager = () => {
 
   const getImageUrl = (image) => {
     // Construct the full URL for the image
-    return `${API_BASE_URL.replace("/api", "")}/${image.file_path}`;
+    return `${API_BASE_URL.replace("/api", "")}${image.file_path}`;
   };
 
   const handleDeleteClick = (image) => {

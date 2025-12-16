@@ -1,0 +1,52 @@
+/* App Layout */
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-white);
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+}
+
+/* Footer Styles */
+.footer {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: var(--spacing-xl) var(--spacing-md);
+  text-align: center;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  align-items: center;
+}
+
+.footer p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family-secondary);
+}
+
+.footer__admin-link {
+  color: var(--color-white);
+  font-size: var(--font-size-xs);
+  text-decoration: none;
+  opacity: 0.5;
+  transition: opacity var(--transition-fast);
+  font-family: var(--font-family-secondary);
+}
+
+.footer__admin-link:hover {
+  opacity: 1;
+  color: var(--color-secondary);
+}
+
+/* Responsive Footer */
+@media (max-width: 767px) {
+  .footer {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+}

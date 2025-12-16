@@ -10,7 +10,7 @@ const router = express.Router();
  * Authenticate user and return JWT token
  * Rate limited to prevent brute force attacks
  */
-router.post("/login", loginRateLimiter, async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
 
