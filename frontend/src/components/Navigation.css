@@ -26,7 +26,7 @@
 .hamburger-line {
   width: 24px;
   height: 3px;
-  background-color: var(--color-primary);
+  background-color: var(--color-cream);
   transition: all var(--transition-normal);
   border-radius: var(--radius-sm);
 }
@@ -35,7 +35,7 @@
 .nav-menu {
   display: flex;
   list-style: none;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-md);
   margin: 0;
   padding: 0;
 }
@@ -46,7 +46,7 @@
 
 .nav-menu a {
   text-decoration: none;
-  color: var(--color-primary);
+  color: var(--color-cream);
   font-family: var(--font-family-secondary);
   font-weight: var(--font-weight-medium);
   font-size: var(--font-size-base);
@@ -58,8 +58,8 @@
 
 .nav-menu a:hover,
 .nav-menu a:focus {
-  color: var(--color-secondary);
-  background-color: var(--color-gray-light);
+  color: var(--color-white);
+  background-color: rgba(255, 255, 255, 0.1);
   outline: none;
 }
 

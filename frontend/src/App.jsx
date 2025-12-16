@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
-import PortfolioPage from "./pages/PortfolioPage";
-import CoursesPage from "./pages/CoursesPage";
+import LiceniPage from "./pages/LiceniPage";
+import UcesyPage from "./pages/UcesyPage";
+import LiftingoveMasazePage from "./pages/LiftingoveMasazePage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import LoginPage from "./pages/admin/LoginPage";
@@ -20,8 +21,12 @@ function App() {
         <main className="main-content">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/portfolio" element={<PortfolioPage />} />
-            <Route path="/kurzy" element={<CoursesPage />} />
+            <Route path="/liceni" element={<LiceniPage />} />
+            <Route path="/ucesy" element={<UcesyPage />} />
+            <Route
+              path="/liftingove-masaze"
+              element={<LiftingoveMasazePage />}
+            />
             <Route path="/o-mne" element={<AboutPage />} />
             <Route path="/kontakt" element={<ContactPage />} />
             <Route path="/admin/login" element={<LoginPage />} />

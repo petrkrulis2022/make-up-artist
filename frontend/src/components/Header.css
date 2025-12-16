@@ -1,46 +1,116 @@
 /* Header styles */
 .header {
-  background-color: var(--color-white);
-  border-bottom: 2px solid var(--color-gray-light);
-  padding: var(--spacing-lg) var(--spacing-xl);
+  background-color: var(--color-primary);
+  border-bottom: none;
+  padding: var(--spacing-lg) 0;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
 }
 
 .header-content {
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: none;
+  margin: 0;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  padding-left: 70px;
+  padding-right: var(--spacing-xl);
+  gap: var(--spacing-md);
 }
 
 .logo-link {
   text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.logo-image {
+  height: 100px;
+  width: auto;
+  max-width: 320px;
+  object-fit: contain;
+  transition: opacity var(--transition-normal);
+}
+
+/* Signature styles */
+.header-signature {
+  font-family: "Brush Script MT", "Segoe Script", cursive;
+  font-size: 1.8rem;
+  color: var(--color-cream);
+  font-style: italic;
+  letter-spacing: 1px;
+  opacity: 0.9;
+  margin-right: auto;
+}
+
+/* Social icons */
+.social-icons {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.social-icons a {
+  color: var(--color-cream);
+  transition: color var(--transition-normal), transform var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-icons a:hover {
+  color: var(--color-white);
+  transform: scale(1.1);
+}
+
+.social-icons svg {
+  width: 24px;
+  height: 24px;
+}
+
+.logo-image:hover {
+  opacity: 0.85;
 }
 
 .logo {
   font-family: var(--font-family-primary);
   font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-bold);
-  color: var(--color-primary);
+  color: var(--color-cream);
   letter-spacing: 1px;
   transition: color var(--transition-normal);
 }
 
 .logo:hover {
-  color: var(--color-secondary);
+  color: var(--color-white);
 }
 
 /* Mobile styles */
 @media (max-width: 767px) {
   .header {
-    padding: var(--spacing-md) var(--spacing-md);
+    padding: var(--spacing-md) 0;
+  }
+
+  .header-content {
+    padding-left: 5px;
+    padding-right: var(--spacing-md);
+  }
+
+  .logo-image {
+    height: 80px;
+    max-width: 220px;
   }
 
   .logo {
     font-size: var(--font-size-lg);
+  }
+
+  .header-signature {
+    display: none;
+  }
+
+  .social-icons {
+    display: none;
   }
 }

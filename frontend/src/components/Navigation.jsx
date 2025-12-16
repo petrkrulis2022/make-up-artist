@@ -40,13 +40,18 @@ function Navigation() {
           </Link>
         </li>
         <li>
-          <Link to="/portfolio" onClick={closeMenu}>
-            Portfolio
+          <Link to="/liceni" onClick={closeMenu}>
+            Líčení
           </Link>
         </li>
         <li>
-          <Link to="/kurzy" onClick={closeMenu}>
-            Kurzy líčení
+          <Link to="/ucesy" onClick={closeMenu}>
+            Účesy
+          </Link>
+        </li>
+        <li>
+          <Link to="/liftingove-masaze" onClick={closeMenu}>
+            Liftingové masáže
           </Link>
         </li>
         <li>

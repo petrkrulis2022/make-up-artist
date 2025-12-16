@@ -5,12 +5,17 @@ const API_BASE_URL =
 
 /**
  * Fetch all categories from the backend
+ * @param {string} parentSection - Optional parent section to filter by
  * @returns {Promise<Array>} Array of category objects
  * @throws {Error} If the API call fails
  */
-export const fetchCategories = async () => {
+export const fetchCategories = async (parentSection = null) => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/portfolio/categories`);
+    let url = `${API_BASE_URL}/portfolio/categories`;
+    if (parentSection) {
+      url += `?parent_section=${parentSection}`;
+    }
+    const response = await axios.get(url);
 
     if (response.data.success) {
       return response.data.data;

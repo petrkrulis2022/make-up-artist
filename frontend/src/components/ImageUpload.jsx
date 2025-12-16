@@ -173,11 +173,33 @@ const ImageUpload = ({ onUploadSuccess }) => {
             }`}
           >
             <option value="">Vyberte kategorii</option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name_cs}
-              </option>
-            ))}
+            <optgroup label="Líčení">
+              {categories
+                .filter((c) => c.parent_section === "liceni")
+                .map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name_cs}
+                  </option>
+                ))}
+            </optgroup>
+            <optgroup label="Účesy">
+              {categories
+                .filter((c) => c.parent_section === "ucesy")
+                .map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name_cs}
+                  </option>
+                ))}
+            </optgroup>
+            <optgroup label="Liftingové masáže">
+              {categories
+                .filter((c) => c.parent_section === "liftingove-masaze")
+                .map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name_cs}
+                  </option>
+                ))}
+            </optgroup>
           </select>
           {errors.category && (
             <span className="image-upload__error" role="alert">

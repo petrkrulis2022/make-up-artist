@@ -1,8 +1,9 @@
 /* CSS Variables - Color Palette and Theme */
 :root {
   /* Color Palette */
-  --color-primary: #8b7355; /* Dark brown/taupe */
+  --color-primary: rgb(92, 79, 71); /* Brown from logo */
   --color-secondary: #d4af37; /* Gold */
+  --color-cream: #f5f0e8; /* Cream background */
   --color-white: #ffffff;
   --color-black: #000000;
   --color-gray-light: #f5f5f5;
@@ -95,8 +96,8 @@ body {
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-normal);
-  color: var(--color-black);
-  background-color: var(--color-white);
+  color: var(--color-primary);
+  background-color: var(--color-cream);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

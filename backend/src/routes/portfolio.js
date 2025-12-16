@@ -6,13 +6,23 @@ const router = express.Router();
 
 /**
  * GET /api/portfolio/categories
- * Return all categories
+ * Return all categories, optionally filtered by parent_section
  */
 router.get("/categories", async (req, res) => {
   try {
-    const result = await query(
-      "SELECT id, name_cs, slug, display_order FROM categories ORDER BY display_order ASC"
-    );
+    const { parent_section } = req.query;
+
+    let result;
+    if (parent_section) {
+      result = await query(
+        "SELECT id, name_cs, slug, display_order, parent_section FROM categories WHERE parent_section = $1 ORDER BY display_order ASC",
+        [parent_section]
+      );
+    } else {
+      result = await query(
+        "SELECT id, name_cs, slug, display_order, parent_section FROM categories ORDER BY display_order ASC"
+      );
+    }
 
     return res.status(200).json({
       success: true,
