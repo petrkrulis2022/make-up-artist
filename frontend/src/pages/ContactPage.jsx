@@ -123,13 +123,27 @@ function ContactPage() {
         <div className="contact-page__info">
           <h2>Kontaktní informace</h2>
           <div className="contact-page__info-item">
-            <strong>Email:</strong> info@glowbyhanka.cz
+            <strong>Email:</strong>{" "}
+            <a href="mailto:hanka@vizazistka-teplice.cz">
+              hanka@vizazistka-teplice.cz
+            </a>
           </div>
           <div className="contact-page__info-item">
-            <strong>Telefon:</strong> +420 777 123 456
+            <strong>Telefon:</strong>{" "}
+            <a href="tel:+420739030701">+420 739 030 701</a>
           </div>
           <div className="contact-page__info-item">
-            <strong>Adresa:</strong> Krásná 15, 110 00 Praha 1, Česká republika
+            <strong>Web:</strong>{" "}
+            <a
+              href="https://www.vizazistka-teplice.cz"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              www.vizazistka-teplice.cz
+            </a>
+          </div>
+          <div className="contact-page__info-item">
+            <strong>Adresa:</strong> Teplice, Česká republika
           </div>
         </div>
 

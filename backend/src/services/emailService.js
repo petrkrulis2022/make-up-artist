@@ -33,7 +33,7 @@ export const sendContactEmail = async (name, email, message) => {
     // Format email content
     const mailOptions = {
       from: process.env.SMTP_FROM,
-      to: process.env.SMTP_FROM, // Send to the makeup artist's email
+      to: process.env.CONTACT_EMAIL || process.env.SMTP_FROM, // Send to configured contact email
       replyTo: email, // Allow replying directly to the sender
       subject: `Nová zpráva z kontaktního formuláře od ${name}`,
       text: `
