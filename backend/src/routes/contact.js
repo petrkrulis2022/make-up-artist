@@ -1,5 +1,8 @@
 import express from "express";
-import { sendContactEmail } from "../services/emailService.js";
+import {
+  sendContactEmail,
+  verifyEmailConnection,
+} from "../services/emailService.js";
 
 const router = express.Router();
 
@@ -8,6 +11,33 @@ const router = express.Router();
  * Basic email format validation
  */
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/**
+ * GET /api/contact/verify
+ * Test SMTP connection (for debugging)
+ */
+router.get("/verify", async (req, res) => {
+  try {
+    const isValid = await verifyEmailConnection();
+    return res.status(200).json({
+      success: true,
+      data: {
+        connected: isValid,
+        message: isValid
+          ? "SMTP connection successful"
+          : "SMTP connection failed",
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: {
+        code: "VERIFICATION_FAILED",
+        message: error.message,
+      },
+    });
+  }
+});
 
 /**
  * POST /api/contact

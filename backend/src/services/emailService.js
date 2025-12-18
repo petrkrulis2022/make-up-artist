@@ -59,7 +59,13 @@ ${message}
     return info;
   } catch (error) {
     console.error("Error sending email:", error.message);
-    throw new Error("Nepodařilo se odeslat email");
+    console.error("Error details:", {
+      code: error.code,
+      command: error.command,
+      response: error.response,
+      responseCode: error.responseCode,
+    });
+    throw error; // Throw the original error for better debugging
   }
 };
 
