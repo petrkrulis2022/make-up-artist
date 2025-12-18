@@ -1,7 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { fetchCategories } from "../services/portfolioService";
+import ImageGallery from "../components/ImageGallery";
 import "./AboutPage.css";
 
 function AboutPage() {
+  const [aboutCategory, setAboutCategory] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadAboutCategory = async () => {
+      try {
+        setLoading(true);
+        const categoriesData = await fetchCategories("o-mne");
+        if (categoriesData.length > 0) {
+          setAboutCategory(categoriesData[0]);
+        }
+      } catch (err) {
+        console.error("Error loading about category:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadAboutCategory();
+  }, []);
+
   return (
     <div className="about-page">
       <div className="about-page__container">
@@ -38,6 +60,12 @@ function AboutPage() {
             vytvoříme váš dokonalý vzhled pro vaši speciální příležitost.
           </p>
         </div>
+
+        {!loading && aboutCategory && (
+          <div className="about-page__gallery">
+            <ImageGallery categoryId={aboutCategory.id} />
+          </div>
+        )}
       </div>
     </div>
   );
